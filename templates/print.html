@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/style/print.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/print.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Web Printer</title>
+</head>
+
+<body>
+    <meta http-equiv="refresh" content="60">
+    <div class="card container-main">
+        <div class="company-logo">
+            <img src="../static/img/company-logo.png" alt="Yağmur Kültür Merkezi">
+        </div>
+        <div class="alert alert-info" role="alert">
+            Yazdırma Ayarlarınızı Düzenleyin.
+        </div>
+        <div class="card container-main"></div>
+        <form action={{ url }} method="POST" enctype="multipart/form-data">
+            <input type="submit" class="custom-submit-button btn btn-primary " value="Yukle" />
+            {% for item in data %}
+            <input type="number" name="itemsLen" id="itemsLen" class="hideMe" value={{ dataLen }}>
+            <div class="card text-dark shadow bg-white rounded">
+                <div class="card-header">
+                    {{ item }}
+                </div>
+                <input type="text" name="itemName_{{ loop.index }}" id="itemName_{{ loop.index }}" class="hideMe"
+                    value={{ item }}>
+                <div class="card-body">
+                    {% if item.endswith((".pdf",".doc",".docx")) %}
+                    <div class="card-title">Sayfa sayısı = 55</div>
+                    <div class="page-type form-check">
+                        <input class="form-check-input" type="radio" name="radios_{{ loop.index }}"
+                            id="radios1_{{ loop.index }}" value="option1" checked>
+                        <label class="form-check-label" for="radios1">
+                            Tek Yüz
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radios_{{ loop.index }}"
+                            id="radios2_{{ loop.index }}" value="option2">
+                        <label class="form-check-label" for="radios2">
+                            Arkalı Önlü
+                        </label>
+                    </div>
+                    {% endif %}
+                    <div class="rangeCopy">
+                        <label for="rangeInput_{{ loop.index }}">Kopya</label>
+                        <input class="rangeInput" type="range" id="rangeInput_{{ loop.index }}"
+                            name="rangeInput_{{ loop.index }}" min="1" max="20" value="1"
+                            oninput="amount.value=rangeInput.value">
+                        <output class="rangeOutput" id="amount" name="amount" for="rangeInput">1</output>
+                    </div>
+                    {% if item.endswith((".pdf",".doc",".docx")) %}
+                    <input type="text" class="pages form-control" id="input_pages_{{ loop.index }}"
+                        name="input_pages_{{ loop.index }}" placeholder="Sayfalar (10-20 / 3,4,5)">
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+body {
+    background-color: whitesmoke;
+    background-image: url("https://www.transparenttextures.com/patterns/lyonnette.png");
+    border-bottom: 0px solid black;
+    height: auto;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+  }
+.container-main{
+    border: solid transparent !important;
+    background-color: transparent !important;
+}
+.company-logo img{
+    position: relative;
+    width: 300px;
+}
+.company-logo{
+    width: auto;
+}
+label[for="rangeInput"]{
+    margin-top:10px;
+}
+.pages{
+    margin-top:10px;
+}
+.card{
+    margin-bottom:10px;
+}
+.hideMe{
+    display:none;
+}
