@@ -1,0 +1,65 @@
+{% extends "admin.html" %}
+{% block container %}
+<!--- START KEY -->
+{% for key in filesar %}
+<div class="container" style="margin-bottom: 10px;margin-top: 10px;">
+   <div class="card shadow-sm">
+      <div class="card-body">
+         <div class="row" style="color: var(--bs-blue);border-left-color: var(--bs-blue);">
+            <!--- KEY MAİN CARD START-->
+            <div class="col-md-6 col-lg-3 col-xl-3 col-xxl-3 offset-xxl-0">
+               <div class="card" style="text-align: center;">
+                  <div class="card-body" style="text-align: left;">
+                     <h4 class="card-title"> {{ key[1] }} </h4>
+                     <h6 class="text-muted card-subtitle mb-2"> {{ key[2] }} </h6>
+                     <i class="fas fa-trash-alt" style="font-size: 26px;color: var(--bs-red);margin-top: 4px;cursor:pointer;" onclick={{ "location.href='" + url +"&removekey=" + key[1] +"';" }} ></i>
+                     {% if key[3] != "" and key[3] != None %}
+                     <i class="fas fa-sticky-note" alt="Müşteri Notu" style="cursor:pointer;z-index:3!important;font-size: 26px;color: var(--bs-warning);margin-left: 21px;transform: perspective(0px) translate(0px) translateY(1px) translateZ(0px);" value="{{ key[3] }}" onclick="popupNote('{{ key[3] }}')"></i>
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+            <!--- KEY MAİN CARD END-->
+            <!--- Item Start -->
+            {% for item in key[4] %}
+            <div class="col-md-6 col-lg-3 col-xl-3 col-xxl-3 offset-xxl-0"
+               style="border-left-color: var(--bs-blue);">
+               <div class="card">
+                  <div class="card-body" style="text-align: left;">
+                     <i
+                     {% if item[2].endswith(".pdf") %}
+                     class="fas fa-file-pdf d-flex float-end file-type-icon"
+                     {% elif item[2].endswith((".docx","doc")) %}
+                     class="fas fa-file-word d-flex float-end file-type-icon"
+                     {% elif item[2].endswith((".png","jpg","jpeg")) %}
+                     class="fas fa-image d-flex float-end file-type-icon"
+                     {% else %}
+                     class="fas fa-file-alt d-flex float-end file-type-icon"
+                     {% endif %}
+                     style="cursor:pointer;font-size: 26px;color: var(--bs-success);margin-left: 21px;transform: perspective(0px) translate(0px) translateY(1px) translateZ(0px);background: rgba(58,59,69,0);" onclick={{ "window.open('" + item[6] + "','_blank');" }} ></i>
+                     <h6 class="card-title"> {{ item[2] }} </h6>
+                     <h6 class="text-muted card-subtitle mb-2">Kopya: {{ item[3] }}
+                        {% if item[2].endswith((".pdf",".doc",".docx"))%}
+                        <br>Sayfalar :
+                        {{ item[4] }}
+                        <br>{{ item[5] }}<br>
+                        {% endif %}
+                     </h6>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>
+{% endfor %}
+<!--- END KEY -->
+{% endblock %}
+{% block scripts %}
+<script>
+   function popupNote(input) {
+      alert("Müşteri Notu : "+input);
+   }
+</script>
+{% endblock %}

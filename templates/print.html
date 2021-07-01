@@ -2,69 +2,94 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../static/style/print.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/print.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Web Printer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Akıllı Çıktı</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
 </head>
 
-<body>
-    <meta http-equiv="refresh" content="60">
-    <div class="card container-main">
-        <div class="company-logo">
-            <img src="../static/img/company-logo.png" alt="Yağmur Kültür Merkezi">
-        </div>
-        <div class="alert alert-info" role="alert">
-            Yazdırma Ayarlarınızı Düzenleyin.
-        </div>
-        <div class="card container-main"></div>
-        <form action={{ url }} method="POST" enctype="multipart/form-data">
-            <input type="submit" class="custom-submit-button btn btn-primary " value="Yukle" />
-            {% for item in data %}
-            <input type="number" name="itemsLen" id="itemsLen" class="hideMe" value={{ dataLen }}>
-            <div class="card text-dark shadow bg-white rounded">
-                <div class="card-header">
-                    {{ item }}
+<body id="page-top">
+    <div id="wrapper" style="height: 100vh;">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content" style="margin-top: 4px;">
+                <div class="container" style="width: 100%;">
+                    <div class="card d-flex" style="max-width: 400px;margin: 0 auto;">
+                        <div class="card-body shadow-sm">
+                            <div style="width: 100%;"><a
+                                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                                    href="#" style="font-size: 30px;">
+                                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                                    <div class="sidebar-brand-text mx-3"><span>Akıllı Çıktı</span></div>
+                                </a></div>
+                            <h4 class="card-title" style="text-align: center;">Yazdırma Ayarlarınızı Düzenleyin.</h4>
+                        </div>
+                    </div>
+                    <form action={{ url }} method="POST" enctype="multipart/form-data">
+                        <input type="number" name="itemsLen" id="itemsLen" class="d-none" value={{ dataLen }}>
+                        <button class="btn btn-primary d-flex justify-content-center align-items-center" type="submit"
+                            style="margin: 0 auto;margin-top: 10px;width: 150px;text-align: center;" value=""><i
+                                class="fas fa-print" style="margin-right: 15px;"></i>Yazdır</button>
+                        {% for item in data %}                                        
+                        <!-- card start -->
+                        <div class="card shadow-sm d-flex" style="max-width: 400px;margin: 0 auto;margin-top: 10px;">
+                            <div class="card-body">
+                                <div style="width: 100%;"><a
+                                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                                        style="font-size: 20px;">
+                                        <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-file-pdf"
+                                                style="font-size: 25px;transform: perspective(0px) translate(8px);"></i>
+                                        </div>
+                                        <input type="text" name="itemName_{{ loop.index }}"
+                                            id="itemName_{{ loop.index }}" class="d-none" value={{ item }}>
+                                        <div class="sidebar-brand-text mx-3"><span> {{ item }} </span>
+                                        </div>
+                                    </a></div>
+                                <output class="rangeOutput" id="amount_{{ loop.index }}" name="amount_{{ loop.index }}" for="rangeInput">Kopya: 1</output>
+                                <input class="form-range" type="range" name="rangeInput_{{ loop.index }}" value="1"
+                                    min="1" max="{{ maxCopy }}" id="rangeInput_{{ loop.index }}" oninput="amount_{{loop.index}}.value='Kopya: '+rangeInput_{{loop.index}}.value">
+                                {% if item.endswith((".pdf",".doc",".docx")) %}
+                                <h6>Yazdırılacak Sayfalar:</h6><input type="text" placeholder="10-20 / 3,4,8" name="input_pages_{{ loop.index }}">
+                                <h6 style="margin-top: 7px;">Sayfa:</h6>
+                                <div class="form-check float-start" style="width: 50%;"><input class="form-check-input"
+                                        type="radio" id="formCheck-2" name="radios_{{ loop.index }}"
+                                        value="Tek Sayfa" checked="checked"><label class="form-check-label" for="formCheck-2">Tek
+                                        Sayfa</label></div>
+                                <div class="form-check float-end" style="width: 50%;"><input class="form-check-input"
+                                        type="radio" id="formCheck-2" name="radios_{{ loop.index }}"
+                                        value="Arkalı Önlü"><label class="form-check-label" for="formCheck-2">Arkalı
+                                        Önlü</label></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- card end -->
+
+                        <!-- NOTE start -->
+                        <div class="card shadow-sm d-flex mb-4" style="max-width: 400px;margin: 0 auto;margin-top: 30px;">
+                            <div class="card-body">
+                                <div style="width: 100%;"><a
+                                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                                        style="font-size: 20px;">
+                                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-envelope-open-text"
+                                                style="font-size: 25px;transform: perspective(0px) translate(8px);"></i>
+                                        </div>
+                                        <div class="sidebar-brand-text mx-3"><span>Ekstra Notunuz</span></div>
+                                    </a></div><input name="extraNote" type="text" style="width: 100%;height: 170px;">
+                            </div>
+                        </div>
+                        <!-- NOTE end -->
+                    </form>
                 </div>
-                <input type="text" name="itemName_{{ loop.index }}" id="itemName_{{ loop.index }}" class="hideMe"
-                    value={{ item }}>
-                <div class="card-body">
-                    {% if item.endswith((".pdf",".doc",".docx")) %}
-                    <div class="card-title">Sayfa sayısı = 55</div>
-                    <div class="page-type form-check">
-                        <input class="form-check-input" type="radio" name="radios_{{ loop.index }}"
-                            id="radios1_{{ loop.index }}" value="option1" checked>
-                        <label class="form-check-label" for="radios1">
-                            Tek Yüz
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radios_{{ loop.index }}"
-                            id="radios2_{{ loop.index }}" value="option2">
-                        <label class="form-check-label" for="radios2">
-                            Arkalı Önlü
-                        </label>
-                    </div>
-                    {% endif %}
-                    <div class="rangeCopy">
-                        <label for="rangeInput_{{ loop.index }}">Kopya</label>
-                        <input class="rangeInput" type="range" id="rangeInput_{{ loop.index }}"
-                            name="rangeInput_{{ loop.index }}" min="1" max="20" value="1"
-                            oninput="amount.value=rangeInput.value">
-                        <output class="rangeOutput" id="amount" name="amount" for="rangeInput">1</output>
-                    </div>
-                    {% if item.endswith((".pdf",".doc",".docx")) %}
-                    <input type="text" class="pages form-control" id="input_pages_{{ loop.index }}"
-                        name="input_pages_{{ loop.index }}" placeholder="Sayfalar (10-20 / 3,4,5)">
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </form>
+            </div><span class="d-flex justify-content-center align-items-center"
+                style="min-height: auto;min-width: auto;margin-bottom: 15px;color: rgb(181,182,188);">Akıllı Çıktı 2021
+                - Made by Emir Bahçeci</span>
+        </div>
     </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static',filename='js/theme.js') }}"></script>
 </body>
 
 </html>

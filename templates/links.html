@@ -1,0 +1,23 @@
+{% extends "admin.html" %}
+{% block container %}
+<button class="btn btn-primary justify-content-center align-items-center" type="button"
+    style="margin-top: 10px;text-align: center;margin-left: 25px;" onclick={{ "location.href='" + url +"&page=createlink';" }}><i class="fas fa-plus"
+        style="margin-right: 15px;"></i>Link Oluştur</button>
+
+<div class="container" style="margin-bottom: 10px;margin-top: 10px;">
+    <div class="row">
+        <div class="col">
+            {% for link in links %}
+            <div class="card float-start" style="margin-top: 20px;margin-right: 40px;">
+                <div class="card-body"><a class="card-link" style="font-size: 24px;" onclick={{ "window.open('" + link[1] + "','_blank');" }}>{{ link[1] }}</a><i
+                        class="fas fa-trash-alt"
+                        style="cursor:pointer; font-size: 32px;color: var(--bs-red);transform: translateX(11px) translateY(-11px);" onclick={{ "location.href='" + url +"&page=links&removelink="+ link[2] +"';" }}></i>
+                    <h6 class="text-muted card-subtitle mb-2" style="margin-top: 15px;">{{ link[3] }}</h6>
+                    <h6 class="card-title">Anahtar : {{ link[2] }}</h6>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

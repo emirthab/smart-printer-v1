@@ -1,127 +1,78 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="../static/style/admin.css" rel="stylesheet" id="css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="conteiner">
-        <div class="nav-side-menu">
-            <div class="brand">Akıllı Çıktı Admin Paneli</div>
-            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-
-            <div class="menu-list">
-
-                <ul id="menu-content" class="menu-content collapse out">
-                    <li>
-                        <a href="?page=admin">
-                            <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="?page=qrcode">
-                            <i class="fa fa-qrcode fa-lg"></i> QR Kod Sayfası
-                        </a>
-                    </li>
-                    <li>
-                        <a href="?page=links">
-                            <i class="fa fa-link fa-lg"></i> Linkler
-                        </a>
-                    </li>
-                    <li>
-                        <a href="?page=settings">
-                            <i class="fa fa-cogs fa-lg"></i> Ayarlar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="?page=settings">
-                            <i class="fa fa-exclamation-triangle fa-lg"></i> Raporlar
-                        </a>
-                    </li>
-                </ul>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Akıllı Çıktı</title>
+      <link rel="stylesheet"
+         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+      <link rel="stylesheet" href="{{ url_for('static',filename='style/bootstrap.min.css') }}">
+   </head>
+   <body id="page-top" style="height:100vh;">      
+      {% block refreshDelay %}
+      {% endblock %}
+      <div id="wrapper">
+         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+               <a
+                  class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                  <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                  <div class="sidebar-brand-text mx-3"><span>Akıllı Çıktı</span></div>
+               </a>
+               <ul class="navbar-nav text-light" id="accordionSidebar">
+                  <li class="nav-item"><a class="nav-link" onclick={{ "location.href='" + url +"';" }} style="cursor:pointer;"><i
+                     class="fas fa-tachometer-alt"
+                     style="font-size: 20px;"></i><span>&nbsp;Dashboard</span></a></li>
+                  <hr class="sidebar-divider">
+                  <li class="nav-item">
+                     <a class="nav-link" onclick={{ "location.href='" + url +"&page=qrcode" +"';" }} style="cursor:pointer;"><i
+                        class="fas fa-qrcode" style="font-size: 20px;"></i><span
+                        style="font-size: 14px;">&nbsp;Qrcode
+                     sayfası</span></a>
+                     <a class="nav-link" onclick={{ "location.href='" + url +"&page=links" +"';" }} style="cursor:pointer;"><i
+                        class="fas fa-link" style="font-size: 20px;"></i><span
+                        style="font-size: 14px;">&nbsp;Linkler</span></a>
+                     <a class="nav-link" onclick={{ "location.href='" + url +"&page=settings" +"';" }} style="cursor:pointer;"><i
+                        class="fas fa-cogs" style="font-size: 18px;margin-right: 0px;"></i><span
+                        style="font-size: 14px;">&nbsp;
+                     Ayarlar</span></a>
+                     <a class="nav-link" onclick={{ "location.href='" + url +"&page=reports" +"';" }} style="cursor:pointer;"><i
+                        class="fas fa-exclamation-triangle" style="font-size: 20px;"></i><span
+                        style="font-size: 14px;">&nbsp;Raporlar</span></a>
+                  </li>
+                  <hr class="sidebar-divider">
+               </ul>
+               <hr class="sidebar-divider my-0">
+               <ul class="navbar-nav text-light" id="accordionSidebar"></ul>
+               <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                  id="sidebarToggle" type="button"></button></div>
             </div>
-        </div>
-        <!-- Item-->
-        <div class="cart-item d-md-flex justify-content-between">
-            <span class="remove-item">
-                <i class="fa fa-times"></i>
-            </span>
-            <div class="product-cont px-3 my-3">
-                <div class="cart-item-product" href="#"></a>
-                    <div class="cart-item-product-info">
-                        <h4>ksdhfjurfvk - 12.04.2021 - 18.30</h4>
-                    </div>
-                    <div class="cart-item-products">
-                        <!--- start -->
-                        <div class="card">
-                            <i class="card-header product fa fa-file-pdf-o">
-                                <a href="asdsa"> osym_giris.jpeg</a>
-                            </i>
-                            <i class="px-3 my-1"> kopya = 12</i>
-                        </div>
-                        <!--- end -->
-                        <!--- start -->
-                        <div class="card">
-                            <i class="card-header product fa fa-file-pdf-o">
-                                <a href="asdsa"> osym_giris.pdf</a>
-                            </i>
-                            <i class="px-3 my-1"> arkalı önlü</i>
-                            <i class="px-3 my-1"> kopya = 12</i>
-                            <i class="px-3 my-1"> sayfalar = 12,12,42</i>
-                        </div>
-                        <!--- end -->
-                        <!--- start -->
-                        <div class="card">
-                            <i class="card-header product fa fa-file-pdf-o">
-                                <a href="asdsa"> osym_giris.pdf</a>
-                            </i>
-                            <i class="px-3 my-1"> arkalı önlü</i>
-                            <i class="px-3 my-1"> kopya = 12</i>
-                            <i class="px-3 my-1"> sayfalar = 12,12,42</i>
-                        </div>
-                        <!--- end -->
-                        <!--- start -->
-                        <div class="card">
-                            <i class="card-header product fa fa-file-pdf-o">
-                                <a href="asdsa"> osym_giris.pdf</a>
-                            </i>
-                            <i class="px-3 my-1"> arkalı önlü</i>
-                            <i class="px-3 my-1"> kopya = 12</i>
-                            <i class="px-3 my-1"> sayfalar = 12,12,42</i>
-                        </div>
-                        <!--- end -->
-                        <!--- start -->
-                        <div class="card">
-                            <i class="card-header product fa fa-file-pdf-o">
-                                <a href="asdsa"> osym_giris.pdf</a>
-                            </i>
-                            <i class="px-3 my-1"> arkalı önlü</i>
-                            <i class="px-3 my-1"> kopya = 12</i>
-                            <i class="px-3 my-1"> sayfalar = 12,12,42</i>
-                        </div>
-                        <!--- end -->
-
-                        <!--- start -->
-                        <div class="card">
-                            <i class="card-header product fa fa-file-pdf-o">
-                                <a href="asdsa"> osym_giris.jpg</a>
-                            </i>
-                            <i class="px-3 my-1"> kopya = 12</i>
-                        </div>
-                        <!--- end -->
-                    </div>
-                </div>
+         </nav>
+         <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content" style="margin-right: 100;">
+               <div class="container shadow-sm" style="margin-bottom: 10px;background: #ffffff;margin:0;width:auto;padding:0;">
+                  <div class="row" style="margin-bottom: 20px;">
+                      <div class="col"></div>
+                      <div class="col-xl-5 col-xxl-3"><img class="d-flex float-end" src="{{ url_for('static',filename='img/company-logo-'+ logoid +'.png') }}" style="height: 100px;margin-right: 40px;"></div>
+                  </div>
+              </div>
+              {% block container %}
+              {% endblock %}
+               
             </div>
-        </div>
-    </div>
-</body>
-
+            <footer class="bg-white sticky-footer">
+               <div class="container my-auto">
+                  <div class="text-center my-auto copyright"><span>Akıllı Çıktı 2021 - Made by Emir Bahçeci</span>
+                  </div>
+               </div>
+            </footer>
+         </div>
+         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="{{ url_for('static',filename='js/theme.js') }}"></script>
+      {% block scripts %}
+      {% endblock %}
+   </body>
 </html>

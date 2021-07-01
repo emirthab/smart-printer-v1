@@ -1,0 +1,172 @@
+{% extends "admin.html" %}
+{% block container %}
+<div class="container" style="margin-bottom: 10px;margin-top: 10px;">
+    <form action={{ url+"&page=settings" }} method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col"><button type="submit" class="btn btn-primary" type="button"
+                    style="margin-top: 20px;background: var(--bs-teal);"><i class="fa fa-save"></i>&nbsp; Ayarları
+                    Kaydet</button>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <h4 style="color: var(--bs-blue);">Uygulama Ayarları :</h4>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 200px;">İp adresi :</h5><input name="appIp"
+                                type="text" placeholder="{{ placeIp }}">
+                        </div>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 200px;">Port :</h5><input name="appPort" type="text"
+                                placeholder="{{ placePort }}">
+                        </div>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 200px;">Kod yenileme (sn) :</h5><input
+                                name="refreshDelay" type="text" placeholder="{{ placeRefresh }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <h4 style="color: var(--bs-blue);">Çıktı Ayarları :</h4>
+                        <h5>İzin verilen dosya formatları :</h5>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_pdf"
+                                    class="form-check-input" type="checkbox" id="formCheck-11" {% if ".pdf" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label
+                                    class="form-check-label" for="formCheck-1">.pdf</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_doc"
+                                    class="form-check-input" type="checkbox" id="formCheck-10" {% if ".doc" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.doc</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_docx"
+                                    class="form-check-input" type="checkbox" id="formCheck-9" {% if ".docx" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.docx</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_xls"
+                                    class="form-check-input" type="checkbox" id="formCheck-8" {% if ".xls" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.xls</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_xlsx"
+                                    class="form-check-input" type="checkbox" id="formCheck-7" {% if ".xlsx" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.xlsx</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_ppt"
+                                    class="form-check-input" type="checkbox" id="formCheck-6" {% if ".ppt" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.ppt</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_pptx"
+                                    class="form-check-input" type="checkbox" id="formCheck-5" {% if ".pptx" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.pptx</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_txt"
+                                    class="form-check-input" type="checkbox" id="formCheck-4" {% if ".txt" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.txt</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_jpg"
+                                    class="form-check-input" type="checkbox" id="formCheck-3" {% if ".jpg" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.jpg</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_jpeg"
+                                    class="form-check-input" type="checkbox" id="formCheck-2" {% if ".jpeg" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.jpeg</label></div>
+                            <div class="form-check float-start"
+                                style="margin-right: 40px;margin-bottom: 10px;margin-top: 5px;"><input name="check_png"
+                                    class="form-check-input" type="checkbox" id="formCheck-2" {% if ".png" is in
+                                    allowedFilesArray %} checked="" {% endif %}><label class="form-check-label"
+                                    for="formCheck-1">.png</label></div>
+                        </div>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 200px;">Maksimum Kopya :</h5><input name="maxCopy"
+                                type="text" placeholder="{{ placeMaxcopy }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <h4 style="color: var(--bs-blue);">Link :</h4>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 150px;">Bitly Api Key :</h5><input name="bitlyToken"
+                                type="text" placeholder="{{ placeBitlyToken }}" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-5"><button class="btn btn-primary" type="button" style="margin-top: 20px;"><i
+                        class="fa fa-refresh"></i>&nbsp; Uygulamayı Yeniden Başlat</button>
+
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <h4 style="color: var(--bs-blue);">Yönetici Bilgileri :</h4>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 150px;">Kullanıcı Adı :</h5><input name="userName"
+                                type="text" placeholder="{{ placeUsername }}">
+                        </div>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 150px;">Şifre :</h5><input name="userPassword"
+                                type="password" placeholder="********">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <h4 style="color: var(--bs-blue);">Ngrok :</h4>
+                        <div class="form-check"><input name="useNgrok" class="form-check-input" type="checkbox"
+                                id="formCheck-1" {% if checkUseNgrok==True %} checked="" {% endif %}><label
+                                class="form-check-label" for="formCheck-1">&nbsp;Ngrok Kullan</label>
+                        </div>
+                        <div class="float-start" style="margin-top: 10px;margin-bottom: 15px;">
+                            <h5 class="float-start" style="width: 120px;">Domain :</h5><input name="domain" type="text"
+                                placeholder="{{ placeDomain }}">
+                        </div>
+                        <h6 class="float-end">NOT : ngrok ip yönlendirme servisi kullanılmayacaksa domain ismi
+                            giriniz.</h6>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <h4 style="color: var(--bs-blue);">Logo :</h4>
+                        <h6 class="float-start" style="color: var(--bs-red);">Önerilen Çözünürlük: 500 x 235 pixel
+                            (png)</h6><input class="mt-3" name="company-logo" type="file" onchange="readURL(this);"
+                            accept="image/*"><img class="mt-4" id="company-logo" width="250" height="117"
+                            src="{{ url_for('static',filename='img/no-image.png') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#company-logo')
+                    .attr('src', e.target.result)
+                    .width(250)
+                    .height(117);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+{% endblock %}
